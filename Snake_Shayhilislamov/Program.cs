@@ -6,6 +6,7 @@ using System.Net;
 using System.Text;
 using System.Linq;
 using System.Threading;
+using System.IO;
 
 namespace Snake_Shayhilislamov
 {
@@ -252,6 +253,13 @@ namespace Snake_Shayhilislamov
 
                 Send();
             }
+        }
+        public static void SaveLeaders()
+        {
+            string json = JsonConvert.SerializeObject(Leaders);
+            StreamWriter SW = new StreamWriter("./leaders.txt");
+            SW.WriteLine(json);
+            SW.Close();
         }
     }
 }
