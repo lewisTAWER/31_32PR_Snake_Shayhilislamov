@@ -65,12 +65,12 @@
                     Height="25"
                     Margin="42,118,0,0"
                     TextWrapping="Wrap"
-                    Text="Alexashchka"
+                    Text="lewis"
                     VerticalAlignment="Top"
                     Width="234"
                     VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Center"
-                    FontFamily="Forte"/>
+                    FontFamily="Forte" TextChanged="name_TextChanged"/>
                     <Button Click="StartGame"
                     Content="Game"
                     HorizontalAlignment="Left"
