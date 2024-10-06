@@ -122,10 +122,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Image\background_2.png" />
+    <Resource Include="Image\background_3.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="gas-kvas-com-p-karti-mainkraft-na-prozrachnom-fone-5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\background_2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

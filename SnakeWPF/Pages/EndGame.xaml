@@ -10,7 +10,7 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/SnakeWPF; component/Image/background.jpg"/>
+            <ImageBrush ImageSource="/Image/background.jpg"/>
         </Grid.Background>
         <Grid Background="White" Width="320" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label x:Name="name" Content="lewis" Margin="45,18,45,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontFamily="Forte" FontSize="16"/>
