@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Media.Animation;
 
 namespace SnakeWPF
 {
@@ -44,6 +45,60 @@ namespace SnakeWPF
         {
             tRec = new Thread(new ThreadStart(Receiver));
             tRec.Start();
+        }
+
+        public void OpenPage(Page PageOpen)
+        {
+            DoubleAnimation startAnimation = new DoubleAnimation();
+            startAnimation.From = 1;
+            startAnimation.To = 0;
+            startAnimation.Duration = TimeSpan.FromSeconds(0.6);
+            startAnimation.Completed += delegate
+            {
+                frame.Navigate(PageOpen);
+                DoubleAnimation endAnimation = new DoubleAnimation();
+                endAnimation.From = 0;
+                endAnimation.To = 1;
+                endAnimation.Duration = TimeSpan.FromSeconds(0.6);
+                frame.BeginAnimation(OpacityProperty, endAnimation);
+            };
+            frame.BeginAnimation(OpacityProperty, startAnimation);
+        }
+
+        public void Receiver()
+        {
+            receivingUdpClient = new UdpClient(int.Parse(ViewModelUserSettings.Port));
+
+            IPEndPoint RemoteIpEndPoint = null;
+
+            while (true)
+            {
+                byte[] receiveBytes = receivingUdpClient.Receive(ref RemoteIpEndPoint);
+                string returnData = Encoding.UTF8.GetString(receiveBytes);
+
+                if (ViewModelGames == null)
+                {
+                    Dispatcher.Invoke(() =>
+                    {
+                        OpenPage(Game);
+                    });
+                }
+                allSnakes = JsonConvert.DeserializeObject<List<ViewModelGames>>(returnData);
+
+                ViewModelGames = allSnakes[allSnakes.Count - 1];
+
+                if (ViewModelGames.SnakesPlayers.GameOver)
+                {
+                    Dispatcher.Invoke(() =>
+                    {
+                        OpenPage(new Pages.EndGame());
+                    });
+                }
+                else
+                {
+                    Game.CreateUI(allSnakes);
+                }
+            }
         }
     }
 }
