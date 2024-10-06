@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Media.Animation;
+using System.Diagnostics;
 
 namespace SnakeWPF
 {
@@ -98,6 +99,25 @@ namespace SnakeWPF
                 {
                     Game.CreateUI(allSnakes);
                 }
+            }
+        }
+        public static void Send(string datagram)
+        {
+            UdpClient sender = new UdpClient();
+            IPEndPoint endPoint = new IPEndPoint(remoteIPaddress, remotePort);
+
+            try
+            {
+                byte[] bytes = Encoding.UTF8.GetBytes(datagram);
+                sender.Send(bytes, bytes.Length, endPoint);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Возникло исключение {ex.ToString()}\n {ex.Message}");
+            }
+            finally
+            {
+                sender.Close();
             }
         }
     }
