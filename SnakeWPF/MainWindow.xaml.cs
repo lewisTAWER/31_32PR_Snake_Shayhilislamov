@@ -35,9 +35,15 @@ namespace SnakeWPF
         public Pages.Game Game = new Pages.Game();
 
         private List<ViewModelGames> allSnakes;
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+        public void StartReceiver()
+        {
+            tRec = new Thread(new ThreadStart(Receiver));
+            tRec.Start();
         }
     }
 }
