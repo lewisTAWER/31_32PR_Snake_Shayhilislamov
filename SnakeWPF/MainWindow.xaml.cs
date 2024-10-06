@@ -1,21 +1,13 @@
 ﻿using Common;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
 using System.Net;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Media.Animation;
 using System.Diagnostics;
 
@@ -41,6 +33,8 @@ namespace SnakeWPF
         public MainWindow()
         {
             InitializeComponent();
+            mainWindow = this;
+            OpenPage(Home);
         }
         public void StartReceiver()
         {
@@ -119,6 +113,35 @@ namespace SnakeWPF
             {
                 sender.Close();
             }
+        }
+        private void EventKeyUp(object sender, KeyEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(ViewModelUserSettings.IPAddress) &&
+                !string.IsNullOrEmpty(ViewModelUserSettings.Port) &&
+                (ViewModelGames != null && !ViewModelGames.SnakesPlayers.GameOver))
+            {
+                if (e.Key == Key.Up)
+                {
+                    Send($"Up|{JsonConvert.SerializeObject(ViewModelUserSettings)}");
+                }
+                else if (e.Key == Key.Down)
+                {
+                    Send($"Down|{JsonConvert.SerializeObject(ViewModelUserSettings)}");
+                }
+                else if (e.Key == Key.Left)
+                {
+                    Send($"Left|{JsonConvert.SerializeObject(ViewModelUserSettings)}");
+                }
+                else if (e.Key == Key.Right)
+                {
+                    Send($"Right|{JsonConvert.SerializeObject(ViewModelUserSettings)}");
+                }
+            }
+        }
+        private void QuitApplication(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            receivingUdpClient.Close();
+            tRec.Abort();
         }
     }
 }
