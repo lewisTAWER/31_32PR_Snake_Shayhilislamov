@@ -43,7 +43,7 @@
                     Height="25"
                     Margin="42,62,0,0"
                     TextWrapping="Wrap"
-                    Text="192.168.0.107"
+                    Text="192.168.0.181"
                     VerticalAlignment="Top"
                     Width="155"
                     VerticalContentAlignment="Center"
@@ -70,8 +70,8 @@
                     Width="234"
                     VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Center"
-                    FontFamily="Forte" TextChanged="name_TextChanged"/>
-                    <Button Click="StartGame"
+                    FontFamily="Forte"/>
+                <Button Click="StartGame"
                     Content="Game"
                     HorizontalAlignment="Left"
                     Margin="42,148,0,0"
