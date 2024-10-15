@@ -14,6 +14,7 @@ namespace SnakeWPF.Pages
         {
             InitializeComponent();
         }
+
         private void StartGame(object sender, RoutedEventArgs e)
         {
             if (MainWindow.mainWindow.receivingUdpClient != null)

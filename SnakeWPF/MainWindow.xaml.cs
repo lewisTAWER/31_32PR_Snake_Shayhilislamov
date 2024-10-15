@@ -1,16 +1,16 @@
 ﻿using Common;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Net.Sockets;
+using System.Diagnostics;
 using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
-using System.Diagnostics;
-using Newtonsoft.Json;
 
 namespace SnakeWPF
 {
@@ -37,6 +37,7 @@ namespace SnakeWPF
             mainWindow = this;
             OpenPage(Home);
         }
+
         public void StartReceiver()
         {
             tRec = new Thread(new ThreadStart(Receiver));
@@ -96,6 +97,7 @@ namespace SnakeWPF
                 }
             }
         }
+
         public static void Send(string datagram)
         {
             UdpClient sender = new UdpClient();
@@ -115,6 +117,7 @@ namespace SnakeWPF
                 sender.Close();
             }
         }
+
         private void EventKeyUp(object sender, KeyEventArgs e)
         {
             if (!string.IsNullOrEmpty(ViewModelUserSettings.IPAddress) &&
@@ -139,6 +142,7 @@ namespace SnakeWPF
                 }
             }
         }
+
         private void QuitApplication(object sender, System.ComponentModel.CancelEventArgs e)
         {
             receivingUdpClient.Close();

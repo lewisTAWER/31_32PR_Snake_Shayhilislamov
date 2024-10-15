@@ -19,6 +19,7 @@ namespace SnakeWPF.Pages
         {
             InitializeComponent();
         }
+
         public void CreateUI()
         {
             Dispatcher.Invoke(() =>
